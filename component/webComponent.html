@@ -1,0 +1,33 @@
+<template>
+    <style>
+        .red{
+            color: red;
+        }
+    </style>
+    
+    <p class="red">test demo</p>
+    
+</template>
+
+<script>
+    (function(){
+        //create an object based in the html element prototype
+        //基于html element prototype 创建obj
+        var element = Object.create(HTMLElement.prototype);
+        //获取template的内容
+        var template = document.currentScript.ownerDocument.querySelector('template').content;
+        //element创建完成之后的回调
+        element.createdCallback = function(){
+            //创建shadow root
+            var shadowRoot = this.createShadowRoot();
+            //向root中加入模板
+            var clone = document.importNode(template,true);
+            shadowRoot.appendChild(clone);
+        };
+        document.registerElement('demo',{
+            prototype:element
+        });
+    }
+    )
+    
+</script>

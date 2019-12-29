@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>v-html_text</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+	    <div id="first">
+	        <span>{{html}}</span>
+	        <span>{{text}}</span>
+	        
+	        <div>
+	            <span v-text="html"></span>
+	            <span v-text="text"></span>
+	        </div>
+	        <div>
+                <span v-html="html"></span>
+                <span v-html="text"></span>
+            </div>
+	    </div>
+	    
+	    <script>
+	        var a = new Vue({
+	           el:"#first",
+	           data:{
+	               text:"Hello World!!!",
+	               html:"<h2>Hello World???<h2>"
+	           }
+	        });
+	    </script>
+	</body>
+</html>

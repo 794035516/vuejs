@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>v-model_elementInTable_code_achieve</title>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+	</head>
+	<body>
+	    <!--
+	        第一个，单选框，有提示信息，数据信息，换行符
+	    -->
+        <div id="first">
+                <span v-if="information == ''">{{initial}}</span>
+                <span v-else="information != ''">{{newInfor}}</span>
+                <span v-html="html"></span>
+                <template v-for="(m,n) in msg">
+                    {{m.title}}<input type="radio" name="n" v-bind:value="m.title" v-model="information">
+                </template>                
+        </div>
+        
+        <!--不会使用v-html来代替这个<hr>,估计是挂在到body失败-->
+        <hr>
+        <!--<span v-html="html"></span>-->
+        
+        <div id="second">
+            <span v-if="information == ''">{{initial}}</span>
+            <span v-else="information != ''">{{newInfor}}</span>
+            <span v-html="html"></span>
+            <div v-for="(item,index) in msg">
+                 <!-- v-model 比 v-bind 更高级，所以去除掉v-model可以默认勾选  -->
+                <div v-for="(v,k,i) in item">        
+					{{v}},{{index}} {{index_typeof(index)}}
+					<input  type="checkbox" 
+				     name="checkbox" :value="v" v-model="information"/>
+                </div>
+            </div>
+        </div>
+        
+	<script>
+		
+		
+		var a = new Vue({
+			el:"#first",
+			data:{
+				msg:[
+					{
+						title:"boy",        
+					},
+					{
+						title:"girl",  
+					},
+				],
+				initial:"未定义",
+				information:"",
+				html:"<br>",
+				
+				
+			}
+		});
+		
+		var b = new Vue({
+			el:"#second",
+			data:{
+				msg:[
+					{
+						job:"厨师",
+					},
+					{
+						job:"老师",
+					},
+					{
+						job:"学生",
+					},
+					{
+						job:"邻居",
+					},
+				],
+				initial:"未定义",
+				information:[],
+				newInfor:"",
+				html:"<br>",
+				
+				
+			},
+			methods:{
+				index_typeof:function(v){
+					return typeof v;
+				}
+			},
+			watch:{
+				information:function(){
+					let j = "";
+					for(let i of this.information){
+						j +=i +",";
+					}
+					this.newInfor = j;
+				}
+			}
+		});
+	</script>
+	</body>
+</html>

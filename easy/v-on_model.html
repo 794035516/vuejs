@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>v-on_model</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+	    <div id="first">
+	        {{num}}
+	        <button v-on:click="addition"> +1 </button>
+	        <button @click="minus"> -1 </button>
+	        <hr>
+	        num:--<input type="text" v-model="num"/>
+	        <hr>
+	        add:--<input type="number" v-model="add" v-on:keyup.ENTER="onEnter">
+	    </div>
+	    
+	    <script>
+	        var a = new Vue({
+	           el:"#first",
+	           data:{
+	             num:10,
+	             add:1,
+	           },
+	           methods:{
+	               onEnter:function(){
+	                 this.num += parseInt(this.add);  
+	               },
+	               addition:function(){
+	                 this.num += 1;  
+	               },
+	               minus:function(){
+	                 this.num -- ;  
+	               },
+	           }
+	        });
+	    </script>
+	</body>
+</html>

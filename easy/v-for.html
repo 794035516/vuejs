@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>v-for</title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	    <div id="first">
+	        <!--未排序的，按照Vue数据进行显示-->
+	        <ul>
+	        	<li v-for="val in stu">
+	        	    {{val}}
+	        	</li>
+	        </ul>
+	        <hr>
+	        <!--按照第一个数字大小进行排序，而不是根据数字大小排序-->
+	        <ul>
+	            <li v-for="vle in sortStu" v-bind:key="vle.id">
+	                {{vle}}
+	            </li>
+	        </ul>
+	        
+	        <hr>
+	        <ul>
+                <li v-for="vl in numStu" v-bind:key="vl.id">
+                    {{vl}}
+                </li>
+            </ul>
+	    </div>
+	    
+	    <script>
+	        var value = new Vue({
+	            el:"#first",
+	            data:{
+	                stu:[1,5,33,27,85,44],
+	                
+	            },
+	            /*
+	             * computed ，计算属性，将复杂的逻辑放入计算中，
+	             * 同时还有缓存功能
+	             * 
+	             * 在这里，遇到一个bug
+	             * You may have an infinite update loop in 
+	             *    a component render function
+	             * vue计算属性computed同时操作一个数组,直接调用
+	             *     sort方法会改变原数组，而计算属性computed
+	             *     在改动同一个数组时，他会认为你在修改一个无限
+	             *     更新的数据，可以采用副本，comcat()或者slice()
+	             *     都可以
+	               */
+	            computed:{
+	                //如果调用sort方法而没有参数，按照字符编码排序
+	                sortStu:function(){
+                        return this.stu.comcat().sort();
+                    },
+                    numStu:function(){
+                        return this.stu.comcat().sort(numSort)
+                    }
+	            },
+	            
+	        });
+	        function numSort(a,b){
+	            return a - b;
+	        }
+	    </script>
+	</body>
+</html>

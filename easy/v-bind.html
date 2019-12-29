@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>v-bind</title>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<link rel="stylesheet" href="../css/v-bind.css" />
+	</head>
+	<body>
+	    <div id="first">
+    	    <h1 :class="A">v-bind</h1>
+            <span :class="B">Hello_world</span>   
+            <input type="text" name="" id="" :value="val" />
+	    </div>
+	    
+	    <script>
+	        var a = new Vue({
+	           el:"#first",
+	           data:{
+	               A:"font",
+	               B:"color",
+	               val:"input something you want"
+	           },
+	        });
+	    </script>
+	</body>
+</html>
